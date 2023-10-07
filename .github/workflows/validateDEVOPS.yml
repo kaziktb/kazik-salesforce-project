@@ -1,0 +1,21 @@
+name: Validate DevInt WoT
+
+on:
+  pull_request:
+    branches: [ int_release/CS_old ]
+    paths:
+      - 'manifest/*'
+      - 'force-app/**'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v2
+      - uses: sfdx-actions/setup-sfdx@v1
+        with:
+          sfdx-auth-url: ${{ secrets.SFDX_AUTH_DEVOPS }}
+      - name: sfdx-validation
+        run: sfdx force:source:deploy -x ./manifest/package-cs.xml -c
