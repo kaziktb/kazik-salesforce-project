@@ -1,0 +1,136 @@
+
+public with sharing class TB_CT_CapitalLetterUtils {
+    private static final String REGEX_FIRST_LETTER = '\\b(([a-z])[\\w]*)';
+    private static final List<String> NAME_PREFIXES = new List<String>{
+            'a',
+            'ab',
+            'af',
+            'ap',
+            'abu',
+            'aït',
+            'al',
+            'alam',
+            'at',
+            'ath',
+            'aust',
+            'austre',
+            'bar',
+            'bath',
+            'bat',
+            'ben',
+            'bin',
+            'ibn',
+            'bert',
+            'bet',
+            'bint',
+            'binti',
+            'binte',
+            'da',
+            'das',
+            'de',
+            'degli',
+            'del',
+            'dele',
+            'della',
+            'der',
+            'di',
+            'dos',
+            'du',
+            'e',
+            'el',
+            'fetch',
+            'vetch',
+            'fitz',
+            'i',
+            'ka',
+            'kil',
+            'gil',
+            'la',
+            'le',
+            'lille',
+            'lu',
+            'mac',
+            'mc',
+            'mck',
+            'mhic',
+            'mic',
+            'mala',
+            'mellom',
+            'myljom',
+            'na',
+            'ned',
+            'nedre',
+            'neder',
+            'nic',
+            'ní',
+            'nin',
+            'nord',
+            'norr',
+            'ny',
+            'opp',
+            'upp',
+            'ofver',
+            'ost',
+            'öst',
+            'öster',
+            'øst',
+            'østre',
+            'över',
+            'øvste',
+            'øvre',
+            'øver',
+            'öz',
+            'pour',
+            'putra',
+            'putera',
+            'putri',
+            'puteri',
+            'setia',
+            'setya',
+            'stor',
+            'söder',
+            'sør',
+            'sør',
+            'syd',
+            'søndre',
+            'syndre',
+            'søre',
+            'ter',
+            'tre',
+            'van',
+            'de',
+            'den',
+            'der',
+            'het',
+            'väst',
+            'väster',
+            'verch',
+            'erch',
+            'vest',
+            'vestre',
+            'vesle',
+            'vetle',
+            'von',
+            'war',
+            'zu'
+    };
+
+    String valueToCapitalize;
+
+    public TB_CT_CapitalLetterUtils(String value) {
+        this.valueToCapitalize = value;
+    }
+
+    public String capitalizeValue() {
+        List<String> splitValue = this.valueToCapitalize.split('');
+        Matcher matcher = Pattern.compile(REGEX_FIRST_LETTER).matcher(this.valueToCapitalize);
+        while (matcher.find()) {
+            String word = matcher.group(1);
+            if (!NAME_PREFIXES.contains(word.toLowerCase())) {
+                Integer startIndexOfGroup = matcher.start();
+                splitValue[startIndexOfGroup] = splitValue[startIndexOfGroup].toUpperCase();
+            }
+        }
+        return String.join(splitValue, '');
+    }
+}
