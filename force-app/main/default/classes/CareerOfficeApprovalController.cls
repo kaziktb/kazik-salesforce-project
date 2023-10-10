@@ -4,7 +4,7 @@ public without sharing class CareerOfficeApprovalController {
     private static final String APPROVAL_PROCESS_FLOW_PROCESS_STEP_PARAM_NAME = 'ProcessStep';
     private static final String APPROVAL_PROCESS_FLOW_RECORD_ID_PARAM_NAME = 'RecordId';
     private static final String APPROVAL_PROCESS_FLOW_IS_APPROVED_PARAM_NAME = 'IsApproved';
-
+    // Run tests for this class please!!!
     private static Flow.Interview.Career_Office_Approval_Process approvalProcessFlow;
 
     private static Map<String, ApprovalProcessType> objectApiName2ProcessType = new Map<String, ApprovalProcessType>{
